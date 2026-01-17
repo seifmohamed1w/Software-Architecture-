@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DocumentEditor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Assignment1-Document_Editor</a> &gt; <a href="index.source.html" class="el_package">org.example.editor</a> &gt; <span class="el_source">DocumentEditor.java</span></div><h1>DocumentEditor.java</h1><pre class="source lang-java linenums">// src/main/java/org/example/editor/DocumentEditor.java
+package org.example.editor;
+
+import org.example.document.Document;
+import org.example.factory.DocumentFactory;
+
+import java.util.Objects;
+
+public class DocumentEditor {
+
+    private final Document document;
+
+<span class="fc" id="L13">    public DocumentEditor(DocumentFactory factory) {</span>
+<span class="fc" id="L14">        Objects.requireNonNull(factory, &quot;factory cannot be null&quot;);</span>
+<span class="fc" id="L15">        this.document = factory.createDocument();</span>
+<span class="fc" id="L16">    }</span>
+
+    public void setContent(String text) {
+<span class="fc" id="L19">        document.setContent(text);</span>
+<span class="fc" id="L20">    }</span>
+
+    public String getContent() {
+<span class="fc" id="L23">        return document.getContent();</span>
+    }
+
+    public void display() {
+<span class="fc" id="L27">        document.display();</span>
+<span class="fc" id="L28">    }</span>
+
+    public void save(String path) {
+<span class="fc" id="L31">        document.save(path);</span>
+<span class="fc" id="L32">    }</span>
+
+    // Optional: helpful for debugging/tests
+    public String getDocumentType() {
+<span class="fc" id="L36">        return document.getClass().getSimpleName();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

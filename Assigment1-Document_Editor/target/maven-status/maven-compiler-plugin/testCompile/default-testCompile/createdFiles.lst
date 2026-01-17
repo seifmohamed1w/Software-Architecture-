@@ -1,0 +1,7 @@
+org\example\factory\DocumentFactoryRegistryTest.class
+org\example\editor\DocumentEditorTest$FakeDocument.class
+org\example\document\PdfDocumentTest.class
+org\example\document\WordDocumentTest.class
+org\example\document\HtmlDocumentTest.class
+org\example\editor\DocumentEditorTest.class
+org\example\editor\DocumentEditorTest$FakeDocumentFactory.class

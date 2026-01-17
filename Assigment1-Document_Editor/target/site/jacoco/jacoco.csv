@@ -1,0 +1,10 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+Assignment1-Document_Editor,org.example.factory,PdfDocumentFactory,4,3,0,0,1,1,1,1,1,1
+Assignment1-Document_Editor,org.example.factory,WordDocumentFactory,4,3,0,0,1,1,1,1,1,1
+Assignment1-Document_Editor,org.example.factory,DocumentFactoryRegistry,0,53,0,4,0,12,0,4,0,2
+Assignment1-Document_Editor,org.example.factory,HtmlDocumentFactory,4,3,0,0,1,1,1,1,1,1
+Assignment1-Document_Editor,org.example.document,PdfDocument,27,139,4,8,7,31,6,7,2,5
+Assignment1-Document_Editor,org.example.document,WordDocument,22,103,3,9,6,25,4,8,1,5
+Assignment1-Document_Editor,org.example.document,HtmlDocument,22,68,3,5,6,17,4,7,1,6
+Assignment1-Document_Editor,org.example,Main,53,0,0,0,18,0,2,0,2,0
+Assignment1-Document_Editor,org.example.editor,DocumentEditor,0,34,0,0,0,12,0,6,0,6

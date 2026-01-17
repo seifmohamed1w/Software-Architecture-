@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PdfDocument.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Assignment1-Document_Editor</a> &gt; <a href="index.source.html" class="el_package">org.example.document</a> &gt; <span class="el_source">PdfDocument.java</span></div><h1>PdfDocument.java</h1><pre class="source lang-java linenums">package org.example.document;
+
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.font.Standard14Fonts;
+
+
+import java.io.IOException;
+import java.nio.file.Path;
+
+<span class="fc" id="L14">public class PdfDocument implements Document {</span>
+
+<span class="fc" id="L16">    private String content = &quot;&quot;;</span>
+
+    @Override
+    public void setContent(String text) {
+<span class="pc bpc" id="L20" title="1 of 2 branches missed.">        this.content = (text == null) ? &quot;&quot; : text;</span>
+<span class="fc" id="L21">    }</span>
+
+    @Override
+    public String getContent() {
+<span class="nc" id="L25">        return content;</span>
+    }
+
+    @Override
+    public void display() {
+<span class="nc" id="L30">        System.out.println(&quot;=== PDF DOCUMENT (Preview) ===&quot;);</span>
+<span class="nc" id="L31">        System.out.println(content);</span>
+<span class="nc" id="L32">        System.out.println(&quot;==============================&quot;);</span>
+<span class="nc" id="L33">    }</span>
+
+    @Override
+    public void save(String path) {
+<span class="fc" id="L37">        Path out = ensureExtension(path, &quot;.pdf&quot;).toAbsolutePath();</span>
+
+<span class="fc" id="L39">        try (PDDocument pdf = new PDDocument()) {</span>
+<span class="fc" id="L40">            PDPage page = new PDPage(PDRectangle.LETTER);</span>
+<span class="fc" id="L41">            pdf.addPage(page);</span>
+
+<span class="fc" id="L43">            try (PDPageContentStream cs = new PDPageContentStream(pdf, page)) {</span>
+<span class="fc" id="L44">                cs.beginText();</span>
+<span class="fc" id="L45">                cs.setFont(new PDType1Font(Standard14Fonts.FontName.HELVETICA), 12);</span>
+
+
+                // Basic margins
+<span class="fc" id="L49">                float marginLeft = 50;</span>
+<span class="fc" id="L50">                float startY = page.getMediaBox().getHeight() - 60;</span>
+<span class="fc" id="L51">                cs.newLineAtOffset(marginLeft, startY);</span>
+
+<span class="fc" id="L53">                float leading = 14.5f;</span>
+
+                // Write lines; auto-wrap is not implemented (simple assignment version)
+<span class="fc" id="L56">                String[] lines = content.split(&quot;\\R&quot;, -1);</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">                for (String line : lines) {</span>
+<span class="fc" id="L58">                    cs.showText(sanitizePdfText(line));</span>
+<span class="fc" id="L59">                    cs.newLineAtOffset(0, -leading);</span>
+                }
+
+<span class="fc" id="L62">                cs.endText();</span>
+            }
+
+<span class="fc" id="L65">            pdf.save(out.toFile());</span>
+<span class="fc" id="L66">            System.out.println(&quot;Saved PDF document to: &quot; + out);</span>
+
+<span class="nc" id="L68">        } catch (IOException e) {</span>
+<span class="nc" id="L69">            throw new RuntimeException(&quot;Failed to save PDF to: &quot; + out, e);</span>
+<span class="fc" id="L70">        }</span>
+<span class="fc" id="L71">    }</span>
+
+    private String sanitizePdfText(String s) {
+        // PDFBox showText does not accept some control chars
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">        return (s == null) ? &quot;&quot; : s.replace(&quot;\t&quot;, &quot;    &quot;);</span>
+    }
+
+    private Path ensureExtension(String path, String ext) {
+<span class="pc bpc" id="L79" title="1 of 4 branches missed.">        if (path == null || path.trim().isEmpty()) {</span>
+<span class="fc" id="L80">            throw new IllegalArgumentException(&quot;Path cannot be empty.&quot;);</span>
+        }
+<span class="fc" id="L82">        String p = path.trim();</span>
+<span class="pc bpc" id="L83" title="1 of 2 branches missed.">        if (!p.toLowerCase().endsWith(ext)) {</span>
+<span class="fc" id="L84">            p += ext;</span>
+        }
+<span class="fc" id="L86">        return Path.of(p);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
